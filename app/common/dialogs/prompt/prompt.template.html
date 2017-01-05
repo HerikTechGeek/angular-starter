@@ -1,0 +1,22 @@
+<md-dialog-content class="md-dialog-content">
+  <form name="promptForm">
+    <h2 class="md-title">{{ctrl.title}}</h2>
+    <div class="md-dialog-content-body">
+      <p>{{ctrl.textContent}}</p>
+    </div>
+    <!-- end ngIf: ::!dialog.mdHtmlContent -->
+    <!-- ngIf: ::dialog.$type == 'prompt' -->
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>{{ctrl.placeholder}}</label>
+      <input name="promptEmailId" ng-model="promptEmailId" type="email" required alt="{{ctrl.ariaLabel}}"/>
+      <div class="para-small zh-failure-message" ng-show="(promptForm.promptEmailId.$dirty && promptForm.promptEmailId.$error.required) || (promptForm.promptEmailId.$dirty && !promptForm.promptEmailId.$valid)">
+          {{"InvalidEmailIdMessage" | __translate}}
+      </div>
+    </md-input-container>
+
+    <md-dialog-actions>
+      <md-button class="md-cancel-button" ng-click="abortDialog()"><span>{{ctrl.cancel}}</span><div class="md-ripple-container"></div></md-button>
+      <md-button class="md-confirm-button" ng-disabled="promptForm.promptEmailId.$error.required || !promptForm.promptEmailId.$dirty || !promptForm.promptEmailId.$valid" ng-click="closeDialog()"><span>{{ctrl.ok}}</span></md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog-content>
